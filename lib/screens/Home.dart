@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:motion_tab_bar/MotionTabController.dart';
 import 'package:quotes_flutter_app/model/Quote.dart';
-import 'package:quotes_flutter_app/widgets/ItemList.dart';
 import 'package:quotes_flutter_app/widgets/QuoteList.dart';
 
 class Home extends StatefulWidget {
@@ -17,7 +17,24 @@ class Home extends StatefulWidget {
   _HomeState createState() => _HomeState();
 }
 
-class _HomeState extends State<Home> {
+class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
+  MotionTabController _motionTabController;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _motionTabController =
+        new MotionTabController(initialIndex: 1, vsync: this,length: 3);
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    _motionTabController.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,7 +72,7 @@ class _HomeState extends State<Home> {
             ),
           ),
           QuoteList(),
-          ],
+        ],
       ),
     );
   }
