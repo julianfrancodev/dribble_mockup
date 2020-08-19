@@ -1,17 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:motion_tab_bar/MotionTabController.dart';
-import 'package:quotes_flutter_app/model/Quote.dart';
 import 'package:quotes_flutter_app/widgets/QuoteList.dart';
+import 'package:intl/intl.dart';
 
 class Home extends StatefulWidget {
-  List<Quote> quotes = [
-    new Quote("Omega 3", "500 - mg", "1 yellow pill, before meal"),
-    new Quote("Asprin", "50 - mg", "2 blue pill, before meal"),
-    new Quote("Omega 6", "500 - mg", "1 yellow pill, before meal"),
-    new Quote("Omega 9", "1000 - mg", "1 yellow pill, before meal"),
-    new Quote("Acetaminophen", "200 - mg", "1 white pill, before breakfast"),
-  ];
+
 
   @override
   _HomeState createState() => _HomeState();
@@ -25,7 +19,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     // TODO: implement initState
     super.initState();
     _motionTabController =
-        new MotionTabController(initialIndex: 1, vsync: this,length: 3);
+        new MotionTabController(initialIndex: 1, vsync: this, length: 3);
   }
 
   @override
@@ -37,6 +31,10 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    final DateTime now = DateTime.now();
+    final DateFormat formatter = DateFormat('yyyy/MM/dd');
+    final String _formatted = formatter.format(now);
+
     return Scaffold(
       backgroundColor: Colors.amber,
       body: ListView(
@@ -57,7 +55,10 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                   children: [
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 10),
-                      child: Text("13 Nov 2020"),
+                      child: Text(
+                        _formatted,
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
                     ),
                     Text(
                       "Hey, Julian!",

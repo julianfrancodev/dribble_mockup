@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quotes_flutter_app/model/DataTime.dart';
 import 'package:quotes_flutter_app/model/Quote.dart';
 import 'package:quotes_flutter_app/widgets/ItemList.dart';
 
@@ -8,17 +9,24 @@ class QuoteList extends StatefulWidget {
 }
 
 class _QuoteListState extends State<QuoteList> {
-  List<Quote> quotes = [
-    new Quote("Omega 3", "500 - mg", "1 yellow pill, before meal"),
-    new Quote("Asprin", "50 - mg", "2 blue pill, before meal"),
-    new Quote("Omega 6", "500 - mg", "1 yellow pill, before meal"),
-    new Quote("Omega 9", "1000 - mg", "1 yellow pill, before meal"),
-    new Quote("Acetaminophen", "200 - mg", "1 white pill, before breakfast"),
-    new Quote("Omega 6", "500 - mg", "1 yellow pill, before meal"),
-    new Quote("Omega 9", "1000 - mg", "1 yellow pill, before meal"),
-    new Quote("Acetaminophen", "200 - mg", "1 white pill, before breakfast"),    new Quote("Omega 6", "500 - mg", "1 yellow pill, before meal"),
-    new Quote("Omega 9", "1000 - mg", "1 yellow pill, before meal"),
-    new Quote("Acetaminophen", "200 - mg", "1 white pill, before breakfast"),
+  List<DataTime> dataTimes = [
+    new DataTime('08:00', [
+      new Quote("Omega 3", "500 - mg", "1 yellow pill, before meal"),
+      new Quote("Asprin", "50 - mg", "2 blue pill, before meal"),
+    ]),
+    new DataTime('11:00', [
+      new Quote("Asprin", "50 - mg", "2 blue pill, before meal"),
+      new Quote("Omega 6", "500 - mg", "1 yellow pill, before meal"),
+    ]),
+    new DataTime('12:00', [
+      new Quote("Lsd", "50 - mg", "2 blue blotter, before meal"),
+      new Quote("Omega 6", "500 - mg", "1 yellow pill, before meal"),
+    ]),
+    new DataTime('22:00', [
+      new Quote("Psilocibin", "50 - mg", "2 blue pill, before meal"),
+      new Quote("Omega 6", "500 - mg", "1 yellow pill, before meal"),
+    ]),
+
   ];
 
   @override
@@ -29,16 +37,19 @@ class _QuoteListState extends State<QuoteList> {
         borderRadius: BorderRadius.only(topLeft: Radius.circular(60)),
 
       ),
-      child: ListView.builder(
+      child: Container(
+        margin: EdgeInsets.only(top: 25),
+        child: ListView.builder(
 
-        itemCount: quotes.length,
-        scrollDirection: Axis.vertical,
-        shrinkWrap: true,
-        physics: ScrollPhysics(),
-        itemBuilder: (context, index) {
-          var quote = quotes[index];
-          return (ItemList(quote: quote));
-        },
+          itemCount: dataTimes.length,
+          scrollDirection: Axis.vertical,
+          shrinkWrap: true,
+          physics: ScrollPhysics(),
+          itemBuilder: (context, index) {
+            var dataTime = dataTimes[index];
+            return (ItemList(dataTime: dataTime));
+          },
+        ),
       ),
     );
   }

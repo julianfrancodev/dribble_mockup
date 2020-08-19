@@ -1,36 +1,45 @@
 import 'package:flutter/material.dart';
-import 'package:quotes_flutter_app/model/Quote.dart';
+import 'package:quotes_flutter_app/model/DataTime.dart';
 
 class ItemList extends StatelessWidget {
-  Quote quote;
+  DataTime dataTime;
 
-  ItemList({this.quote});
+  ItemList({this.dataTime});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 30, horizontal: 60),
-      height: 40,
+      margin: EdgeInsets.symmetric(horizontal: 35),
+      height: 200,
       child: Column(
         children: [
           Row(
             children: [
-              Icon(Icons.ac_unit),
-              SizedBox(
-                width: 7,
-              ),
               Text(
-                quote.name,
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
-              ),
-              Text(
-                " - ${quote.quantity}",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
+                dataTime.timeData,
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
               )
             ],
           ),
-          Row(
-            children: [Text(quote.descrition)],
+          ListView.builder(
+            itemCount: dataTime.quotes.length,
+            scrollDirection: Axis.vertical,
+            shrinkWrap: true,
+            physics: ScrollPhysics(),
+            itemBuilder: (context, index) {
+              var quote = dataTime.quotes[index];
+              return Container(
+                child: Column(
+                  children: [
+                    ListTile(
+                      title: Text(quote.name),
+                      leading: Icon(Icons.favorite_border),
+                    ),
+                    Divider(),
+                  ],
+                ),
+              );
+            },
           )
         ],
       ),
